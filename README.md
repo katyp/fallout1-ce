@@ -38,21 +38,52 @@ $ sudo apt install libsdl2-2.0-0
 
 > **NOTE**: macOS 10.11 (El Capitan) or higher is required. Runs natively on Intel-based Macs and Apple Silicon.
 
-- Use Windows installation as a base - it contains data assets needed to play. Copy `Fallout` folder somewhere, for example `/Applications/Fallout`.
+Download the latest release DMG from the [releases page](https://github.com/alexbatalov/fallout1-ce/releases) and open it. You'll find `Fallout Community Edition.app` inside.
 
-- Alternatively you can use Fallout from MacPlay/The Omni Group as a base - you need to extract game assets from the original bundle. Mount CD/DMG, right click `Fallout` -> `Show Package Contents`, navigate to `Contents/Resources`. Copy `GameData` folder somewhere, for example `/Applications/Fallout`.
+You'll need to extract game data files from either a GOG installer or an original Mac version. Choose the option that matches what you own.
 
-- Or if you're a Terminal user and have Homebrew installed you can extract the needed files from the GoG installer:
+#### Option A: GOG Installer
+
+Create a folder for your game files, for instance `~/Games/Fallout`:
+
+```console
+$ mkdir -p ~/Games/Fallout
+```
+
+Extract the game data files using `innoextract`:
 
 ```console
 $ brew install innoextract
-$ innoextract ~/Downloads/setup_fallout_2.1.0.18.exe -I app
-$ mv app /Applications/Fallout
+$ cd ~/Downloads
+$ innoextract setup_fallout_*.exe
 ```
 
-- Download and copy `fallout-ce.app` to this folder.
+Copy all required files to your game folder. The files must be **siblings** (in the same directory) as the app bundle:
 
-- Run `fallout-ce.app`.
+```console
+$ cp ~/Downloads/MASTER.DAT ~/Downloads/CRITTER.DAT ~/Downloads/__support/app/*.{cfg,ini} ~/Games/Fallout/
+$ cp -r "/Volumes/Fallout Community Edition/Fallout Community Edition.app" ~/Games/Fallout/
+```
+
+(Replace `~/Games/Fallout/` with your chosen directory if different, such as `/Applications/Fallout/`)
+
+#### Option B: MacPlay/The Omni Group Version
+
+If you have the original Fallout from MacPlay/The Omni Group, you can extract game assets from that bundle. Mount the CD/DMG, right click `Fallout` → `Show Package Contents`, navigate to `Contents/Resources`. Copy the `GameData` folder contents to your game folder (e.g., `~/Games/Fallout` or `/Applications/Fallout`), then add `Fallout Community Edition.app` there.
+
+#### Final Structure
+
+Your final structure should look like:
+```
+~/Games/Fallout/
+├── Fallout Community Edition.app
+├── MASTER.DAT
+├── CRITTER.DAT
+├── fallout.cfg
+└── f1_res.ini
+```
+
+- Run `Fallout Community Edition.app`.
 
 ### Android
 
